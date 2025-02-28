@@ -1,0 +1,60 @@
+<div class="task-container">
+<h2>Task Manager</h2>
+<!-- Add Task Form -->
+<div class="add-task">
+<form #taskForm="ngForm">
+<!-- Task Name -->
+<input
+          type="text"
+          placeholder="Task Name"
+          name="taskName"
+          [(ngModel)]="taskName"
+          #taskNameInput="ngModel"
+          required
+          minlength="3" />
+<small *ngIf="taskNameInput.invalid && taskNameInput.touched" class="error">
+          Task name must be at least 3 characters long.
+</small>
+<!-- Task Description -->
+<input
+          type="text"
+          placeholder="Description"
+          name="taskDesc"
+          [(ngModel)]="taskDesc" />
+<!-- Due Date -->
+<input
+          type="date"
+          name="taskDate"
+          [(ngModel)]="taskDate"
+          #taskDateInput="ngModel"
+          required />
+<small *ngIf="taskDateInput.invalid && taskDateInput.touched" class="error">
+          Due date is required.
+</small>
+<small *ngIf="taskDate && !isDateInFuture(taskDate)" class="error">
+    Due date must be in the future.
+</small>
+<!-- Add Task Button -->
+<button
+    type="button"
+    (click)="addTask()"
+    [disabled]="taskForm.invalid || !isDateInFuture(taskDate)">
+    Add Task
+</button>
+
+</form>
+</div>
+<!-- Task Cards -->
+<div *ngFor="let task of tasks" class="task-card">
+<h3>  {{ task.name }}</h3>
+<p>{{ task.description }}</p>
+<p><strong>Due Date:</strong> {{ task.dueDate }}</p>
+<p><strong>Status:</strong>
+<span [ngClass]="{'pending': task.status === 'pending', 'completed': task.status === 'completed'}">
+          {{ task.status }}
+</span>
+</p>
+<button (click)=" toggleStatus(task.id)" class="delete">Toggle Status</button>   
+<button (click)=" deleteTask(task.id)" class="delete">Delete</button>
+</div>
+</div>

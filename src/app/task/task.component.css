@@ -1,0 +1,31 @@
+.task-container {
+    width: 50%;
+    margin: auto;
+    text-align: center;
+  }
+  .add-task {
+    margin-bottom: 20px;
+  }
+  .task-card {
+    border: 1px solid #ccc;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 5px;
+  }
+  .pending {
+    color: red;
+    font-weight: bold;
+  }
+  .completed {
+    color: green;
+    font-weight: bold;
+  }
+  button {
+    margin: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  .delete {
+    background-color: red;
+    color: white;
+  }
